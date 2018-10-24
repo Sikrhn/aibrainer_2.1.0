@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.zhu.dao.RectDataDao">
+    	<select id="getRectDataFirst" resultType="java.lang.String">
+    		select data_name from developer_data 
+    		where developer=#{developer} 
+    		and assignment=#{assignment} 
+    		and data_label is NULL 
+    		limit 5;
+    	</select>
+    	<select id="getRectDataSecond" resultType="java.lang.String">
+    		select data_name from developer_data 
+    		where developer=#{developer} 
+    		and assignment=#{assignment} 
+    		and data_label is NULL 
+    		limit 5,5;
+    	</select>
+    	<update id="markedDtData">
+    		UPDATE `ai_brainer`.`developer_data` SET `data_label` = '1' 
+    		WHERE `developer` = #{developer} 
+    		AND `assignment` = #{assignment}
+    		AND `data_name` = #{dataName} 
+    		AND `data_label` IS NULL; 
+    	</update>
+    	<insert id="insertMarkerData">
+    		INSERT INTO `ai_brainer`.`rect_data` 
+    		(`developer`, `assignment`, `username`, `data_name`,`width`,`height`, `data_label`, `xmin`, `ymin`, `xmax`, `ymax`) 
+    		VALUES (#{rectData.developer}, #{rectData.assignment}, #{username}, #{rectData.dataName},
+    		#{rectData.width},#{rectData.height}, #{rectData.dataLabel}, 
+    		#{rectData.xmin}, #{rectData.ymin},#{rectData.xmax},#{rectData.ymax}); 
+    		
+    	</insert>
+    	<delete id="deleteDataByUsername">
+    		delete from rect_data where
+    		<if test="username==null">
+    		 username is null
+    		</if>
+    		<if test="username!=null">
+    		 username = #{username} 
+    		</if>
+    		and developer = #{developer} 
+    		and assignment=#{assignment}
+    	</delete>
+    	<select id="getRandomFiveLabelByUser" resultType="com.zhu.entity.RectData">
+    		SELECT * FROM rect_data WHERE developer = #{developer} 
+    		AND assignment = #{assignment} 
+    		AND username = #{username} 
+    		AND data_label IS NOT NULL  
+    		ORDER BY RAND() LIMIT 5;
+    	</select>
+    	<select id="getLabelList" resultType="com.zhu.entity.RectData" >
+    		SELECT * 
+    		FROM rect_data
+    		WHERE developer=#{developer}
+    		AND assignment=#{assignment} 	  		
+    	</select>
+    	<select id="getRandomBySatistic" resultType="com.zhu.entity.RectData" >
+    		SELECT * 
+    		FROM rect_data
+    		WHERE developer=#{developer}
+    		AND assignment=#{assignment}
+    		ORDER BY RAND() LIMIT 5; 		
+    	</select>
+    	<delete id="deleteAllByAssignment">
+    		delete from rect_data where   		
+  			developer = #{developer} 
+    		and assignment=#{assignment}
+    	</delete>
+    	
+    </mapper>

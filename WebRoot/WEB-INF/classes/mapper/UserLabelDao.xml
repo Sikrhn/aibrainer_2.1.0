@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhu.dao.UserLabelDao">
+	<insert id="insertData">
+		INSERT INTO user_label(username,developer,assignment,data_name,is_adopt) 
+		VALUES(#{username},#{developerData.developer},#{developerData.assignment},#{developerData.dataName},0)
+	</insert>
+	<select id="firstGetDataName" resultType="UserLabel">
+		SELECT * FROM user_label
+		WHERE developer = #{developer}
+		AND username = #{username}
+		AND assignment = #{assignment}
+		AND data_label IS NULL
+		LIMIT 10
+	</select>
+	<select id="preGetDataName" resultType="UserLabel">
+		SELECT * FROM user_label 
+		WHERE developer = #{developer}
+		AND assignment = #{assignment}
+		AND username = #{username}
+		AND data_label IS NULL
+		LIMIT 10,10
+	</select>
+	<update id="updateLabel">
+		UPDATE `user_label` SET `data_label` = #{userLabel.dataLabel} 
+		WHERE `username` = #{userLabel.username}
+		AND `developer` = #{userLabel.developer} 
+		AND `assignment` = #{userLabel.assignment}
+		AND `data_name` = #{userLabel.dataName} 
+		AND `data_label` IS NULL; 
+	</update>
+	<select id="getRandUserLabel" resultType="UserLabel">
+		SELECT * FROM user_label 
+		WHERE username = #{username} 
+		AND developer = #{developer}
+		AND assignment = #{assignment} 
+		AND data_label IS NOT NULL
+		ORDER BY RAND() LIMIT 5
+	</select>
+	<select id="getDataNum" resultType="int">
+		SELECT COUNT(*) FROM user_label 
+		WHERE username=#{username} 
+		AND developer=#{developer} 
+		AND assignment=#{assignment}
+	</select>
+	
+	<select id="getAllUserByDataName" resultType="UserLabel">
+		SELECT a.`username`,a.`developer`,a.`assignment`,a.`data_name`,a.`data_label`,a.is_adopt 
+		FROM user_label a RIGHT JOIN USER b 
+		ON a.`username`=b.`username`
+		WHERE a.developer= #{developer} 
+		AND a.assignment = #{assignment}
+		AND a.data_name= #{dataName}
+		ORDER BY b.rank DESC
+	</select>
+	<delete id="deleteUserData">
+		DELETE FROM user_label
+		WHERE developer= #{developer} 
+		AND assignment=#{assignment}
+		
+	</delete>
+	<update id="adoptLabel">
+		UPDATE user_label SET is_adopt = 1
+		WHERE username = #{username}
+		AND assignment = #{assignment}
+		AND data_name = #{dataName}
+		AND developer = #{developer}
+	</update>
+	<delete id="deleteUserDataByName">
+	DELETE FROM user_label
+		WHERE developer= #{developer} 
+		AND assignment=#{assignment}
+		AND username=#{username}
+	</delete>
+</mapper>

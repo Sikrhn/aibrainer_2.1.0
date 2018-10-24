@@ -1,0 +1,146 @@
+ ul.nav-tabs{
+       width: 140px;
+       margin-top: 20px;
+       border-radius: 4px;
+       border: 1px solid #ddd;
+       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    }
+    ul.nav-tabs li{
+        margin: 0;
+        border-top: 1px solid #ddd;
+    }
+    ul.nav-tabs li:first-child{
+        border-top: none;
+    }
+    ul.nav-tabs li a{
+        margin: 0;
+        padding: 8px 16px;
+        border-radius: 0;
+    }
+    ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+        color: #fff;
+        background: #0088cc;
+        border: 1px solid #0088cc;
+    }
+    ul.nav-tabs li:first-child a{
+        border-radius: 4px 4px 0 0;
+    }
+    ul.nav-tabs li:last-child a{
+        border-radius: 0 0 4px 4px;
+    }
+    ul.nav-tabs.affix{
+        top: 30px; /* Set the top position of pinned element */
+    }
+    #imgs{
+    	width:100%;
+    }
+    .input-group .form-control {
+    	position: relative;
+    	z-index: 2;
+    	float: left;
+    	width: 70%;
+    	margin-bottom: 0;
+	}
+
+	.btn-info{
+		display: none;
+	}
+	@media (min-height: 700px){
+		.my-ul {
+    	height: 288.5px;
+		}
+	}
+	.my-ul{
+
+		overflow:auto;		
+		text-overflow: ellipsis; 
+	}
+	.my-ul::-webkit-scrollbar {
+				
+    			width: 4%;     
+    			height: 1px;
+			}
+	.my-ul::-webkit-scrollbar-thumb { 
+	    border-radius: 10px;
+		background-color: #F90;
+		background-image: -webkit-linear-gradient(bottom left, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+		background-image: -o-linear-gradient(bottom left, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+		background-image: linear-gradient(to top right, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	}
+	.my-ul::-webkit-scrollbar-track {
+		 background: #EDEDED;
+	}
+	.my-input{
+		padding: 0px 0px 10px;
+	}	
+	div .panel-heading,#taskList .list-group-item{
+		cursor: pointer;
+	}
+	div .panel .panel-default{
+		width: 60%;
+		margin: auto;
+	}
+	ul 
+	span .glyphicon .glyphicon-chevron-left{
+		cursor: pointer;
+	}
+	.glyphicon-chevron-left:hover{
+		color:#8df9ff;
+	}
+	#operate #cont .container{
+		border-radius: 5px;
+		background-color: #ebebeb;
+	}
+	.statisticLabel{
+		font-size: 100%;
+	}
+	#cont{
+		padding-top: 5%;
+		padding-bottom: 3%;
+	}
+	#mycontent h1 .pull-left,#mycontent #form-data h3,#cont #mycontent .title{
+		padding-top: 3%;
+	}
+	.nav > li{
+		margin-right: 10px;
+	}
+	#operate #cont #mycontent a:hover,#otherPage:hover{
+		color:#45eaf6;
+	}
+	#joinUs:hover,#joinUs:focus{
+		color:#45eaf6;
+	}
+	
+	
+	#clients img.img-responsive {
+	    height: 150px;
+	}
+	.title{
+		text-align:center;
+	}
+	#imgArea{
+		margin:auto;
+		width:80%;
+	}
+	.userList td,.downloadBox td{
+		text-align:center;
+	}
+	#working{
+		width:100%;
+	}
+	a.list-group-item.danger{
+		background-color:#ff5b5b;
+		color: #ffffff;
+	}
+	a.list-group-item.danger:hover{
+		background-color:#ff0000;
+	}
+	a.list-group-item,.panel table tbody td{
+		text-align:center;
+	}
+	#canvas{
+		border: 1px solid #000;
+		margin: auto;
+		
+   		background-size: 100% 100%;
+	}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.zhu.dao.DeveloperTaskDao">
+	
+	<select id="getTaskSimple" resultType="com.zhu.dto.TaskBody">
+		SELECT assignment,isover,ispublic,developer,sum,need_workers,workers,task_type FROM developer_task WHERE developer=#{developer}
+	</select>
+
+	<select id="getTaskNum" resultType="int">
+		SELECT count(*)	FROM developer_task 
+	</select>
+	<select id="getDeveloperTaskNum" resultType="int">
+		SELECT count(*) FROM developer_task WHERE developer = #{developer}
+	</select>
+	<select id="getAllTask" resultType="DeveloperTask">
+		SELECT *
+		FROM developer_task WHERE isover!=1
+		LIMIT #{page},#{rows}
+	</select>
+	<select id="getPublicTask" resultType="DeveloperTask">
+		SELECT * FROM developer_task WHERE ispublic = 1 AND isover=0  ORDER BY RAND() LIMIT 5
+	</select>
+	<select id="getDetailOne" resultType="DeveloperTask">
+		SELECT *
+		FROM developer_task 
+		WHERE assignment = #{assignment} 
+		AND developer = #{developer} 
+	</select>
+	<insert id="insertTask">
+		INSERT INTO `developer_task` (`developer`, `assignment`,`task_type`,`description`,`date`, `ispublic`,`isover`,  `sum`, `need_workers`, `unit_price`, `workers`, `level_rank`, `exp`,`predict_expend`) 
+		VALUES (#{developerTask.developer},#{developerTask.assignment},#{developerTask.taskType}, #{developerTask.description},#{developerTask.date},#{developerTask.ispublic},#{developerTask.isover},#{developerTask.sum},#{developerTask.needWorkers},#{developerTask.unitPrice},#{developerTask.workers},#{developerTask.levelRank},#{developerTask.exp},#{developerTask.predictExpend})
+	</insert>
+	<update id="addWokerNum">
+		UPDATE `developer_task` SET `workers`=`workers`+1  WHERE `developer` = #{developer} AND `assignment` = #{assignment} 		
+	</update>
+	<update id="reduceWokerNum">
+		UPDATE `developer_task` SET `workers`=`workers`-1  WHERE `developer` = #{developer} AND `assignment` = #{assignment} 		
+	</update>
+	<select id="taskIsOver" resultType="java.lang.Boolean">
+		SELECT isover FROM developer_task WHERE developer = #{developer} AND assignment = #{assignment}
+	</select>
+	
+	<select id="isNeedWorker" resultType="DeveloperTask">
+		SELECT workers,need_workers
+		FROM developer_task 
+		WHERE developer=#{developer} 
+		AND assignment=#{assignment}
+		AND workers!=need_workers
+	</select>
+	<select id="getSelfTask" resultType="DeveloperTask">
+		SELECT a.assignment,a.developer,a.description, 
+			a.date,a.ispublic,a.isover,b.sum,b.need_workers, 
+			b.unit_price,b.workers,b.level_rank,b.exp 
+		FROM developer_task
+		WHERE a.developer=#{developer}
+	</select>
+	<delete id="deleteTaskByAssignment">
+		DELETE FROM developer_task WHERE developer=#{developer} AND assignment=#{assignment}
+	</delete>
+	<update id="overTask">
+		UPDATE developer_task SET isover = 1 WHERE developer = #{developer} AND assignment = #{assignment}
+	</update>
+	<select id="queryMoney" resultType="java.lang.Double">
+		SELECT predict_expend FROM developer_task 
+		WHERE developer=#{developer} 
+		AND assignment = #{assignment}
+	</select>
+	<update id="payMoney">
+		 UPDATE developer_task SET predict_expend = predict_expend - #{money} 
+		 WHERE developer = #{developer}
+		 AND assignment = #{assignment}
+	</update>
+	<select id="queryTaskExist" resultType="DeveloperTask">
+		select * from developer_task where assignment=#{assignment} and developer=#{developer}
+	</select>
+	<update id="updateWorkerNum">
+		UPDATE developer_task SET need_workers = #{num} WHERE developer = #{developer} AND assignment = #{assignment}
+	</update>
+</mapper>

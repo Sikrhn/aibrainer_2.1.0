@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+  <mapper namespace="com.zhu.dao.PublicDataDao">
+	  <insert id="insertData" >
+	  	INSERT INTO `public_data` (`assignment`, `developer`, `data_name`, `data_label`) 
+	  	VALUES (#{publicData.assignment}, #{publicData.developer}, #{publicData.dataName}, #{publicData.dataLabel}); 
+	  </insert>  
+	  <select id="getRandFive" resultType="DeveloperData">
+	  	SELECT a.developer,a.assignment,a.data_name,a.data_label FROM developer_data a LEFT JOIN public_data b 
+		ON a.developer = b.developer AND a.assignment = b. assignment 
+		AND a.data_name = b. data_name 
+		WHERE a.developer = #{developer} AND a.assignment = #{assignment} 
+		AND #{num}>(SELECT COUNT(data_name) FROM public_data WHERE data_name=a.data_name AND developer = a.developer AND assignment = a.assignment)
+		ORDER BY RAND() LIMIT 5	
+	  </select>
+	  <select id="getMarkedLabel" resultType="PublicData">
+	  	SELECT * FROM 
+		(
+		SELECT assignment,developer, data_name, data_label 
+		FROM public_data 
+		WHERE assignment = #{assignment} 
+		AND developer=#{developer} ORDER BY RAND()
+		) AS pd
+		GROUP BY pd.data_name 
+	  </select>
+	  
+	  <select id="getMarkedNumber" resultType="java.lang.Integer">
+	  	SELECT COUNT(data_label) AS num FROM public_data 
+		WHERE developer = #{developer} AND assignment = #{assignment}
+	  </select>
+	  <delete id="deleteDataByAssignment" >
+	  	DELETE FROM public_data WHERE developer=#{developer} AND assignment = #{assignment}
+	  </delete>
+  </mapper>

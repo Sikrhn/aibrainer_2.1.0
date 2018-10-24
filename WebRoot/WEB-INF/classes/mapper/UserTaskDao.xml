@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.zhu.dao.UserTaskDao">
+	<delete id="deleteUserTask">
+		delete from user_task where assignment=#{assignment} and developer=#{developer}
+	</delete>
+	<select id="getTaskSimple" resultType="com.zhu.dto.TaskBody">
+		SELECT a.assignment,a.isover,a.ispublic,a.developer,a.task_type 
+		FROM developer_task a left join user_task b ON a.assignment = b.assignment AND 
+		a.developer = b.developer
+		WHERE username=#{username}
+	</select>
+	
+	<insert id="insertUserTask">
+		INSERT INTO `user_task` (`username`, `developer`,`marked_num` ,`assignment`,`isover`,`data_sum`,`adopt_num`,`task_type`) 
+		VALUES (#{userTask.username}, #{userTask.developer},#{userTask.markedNum}, #{userTask.assignment},#{userTask.isover},#{userTask.dataSum},#{userTask.adoptNum},#{userTask.taskType}); 
+	</insert>
+	<select id="getUserTask" resultType="UserTask">
+		SELECT * FROM `user_task` WHERE username = #{username}
+	</select>
+	<select id="getSameUserTask" resultType="UserTask">
+		SELECT * FROM `user_task` WHERE developer = #{developer}
+		AND assignment = #{assignment}
+	</select>
+	<select id="getUserSimpleByTask" resultType="com.zhu.dto.UserSimpleBody">
+		SELECT a.username,a.rank,b.marked_num,b.isover FROM `user` a LEFT JOIN `user_task` b 
+		ON a.username = b.username 
+		WHERE b.assignment = #{assignment} AND b.developer = #{developer}
+	</select>
+	<select id="getWorkingTask" resultType="UserTask">
+		SELECT * FROM `user_task` WHERE developer = #{developer}
+		AND assignment = #{assignment} AND username = #{username}
+	</select>
+	
+	<update id="updateIsOver">
+		UPDATE user_task SET isover = true
+		WHERE username=#{username}
+		AND assignment =#{assignment}
+		AND developer = #{developer}
+	</update>
+	
+	<select id="getAllUserIsOver" resultType="java.lang.Boolean">
+		SELECT isover FROM `user_task` WHERE developer = #{developer}
+		AND assignment = #{assignment}
+	</select>
+	
+	<update id="updateMarkedNum">
+		 UPDATE user_task SET marked_num = marked_num + #{num}
+		WHERE username=#{username}
+		AND assignment =#{assignment}
+		AND developer = #{developer}
+	</update>
+	<select id="getMarkedDetail" resultType="com.zhu.dto.UserMsgBody">
+		SELECT b.marked_num,COUNT(*) AS adopt_num 
+		FROM user_label a LEFT JOIN user_task b 
+		ON a.username = b.username
+		AND a.developer = b.developer
+		AND a.assignment = b.assignment 
+		WHERE a.developer = #{developer}
+		AND a.assignment = #{assignment} 
+		AND a.username = #{username}
+		AND a.is_adopt=1
+	</select>
+	<update id="insertAccuracyMoney">		
+		UPDATE user_task SET accuracy = #{UserTask.accuracy} ,task_money=#{UserTask.taskMoney},adopt_num=#{UserTask.adoptNum}
+		WHERE username = #{UserTask.username} 
+		AND developer = #{UserTask.developer}
+		AND assignment = #{UserTask.assignment}
+	</update>
+	<delete id="deleteUserTaskByName">
+		DELETE FROM user_task
+		WHERE developer= #{developer} 
+		AND assignment=#{assignment}
+		AND username=#{username}
+	</delete>
+	<update id="reoverUserTask">
+		UPDATE user_task SET isover  = 0 WHERE assignment = #{assignment} AND developer=#{developer}
+	</update>
+</mapper>

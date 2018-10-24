@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<link rel="icon" href="resources/images/ab.png" type="image/x-icon"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>Off Canvas Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="resources/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/offcanvas.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/css/myself.css">
+    <style>
+      .panel-body ul{
+        padding: 0;
+        list-style: none;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AiBrainer-拉框标注</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a class ="pc" id="operate" href="javascript:void(0)">开始拉框</a></li>
+            <li><a class ="pc" id="pre" href="javascript:void(0)">撤回到上一步</a></li>            
+            <li><a class ="pc" id="improper" href="javascript:void(0)">图像非正常</a></li>
+            <li><a class ="pc" id="next" href="javascript:void(0)">下一张</a></li>
+            <li><a id="" href="javascript:void(0)">任务详情</a></li>
+            <li><a id="" href="javascript:void(0)">如何标注？</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    
+    <div class="container">
+      
+        <h1><span id="assignment"></span>
+            <small>开发者：<span id="developer"></span></small>
+        </h1> 
+  	<span class="badge pull-right">总数据量:<span id="sum"></span></span>&nbsp;
+    <span class="badge pull-right">被标注总次数<span id="marked"></span></span>&nbsp;
+    <span class="badge pull-right">我的标注次数:<span id="mymarked"></span></span>
+    <p id="description"></p>
+
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group" width="300px" height="500px">
+            <p href="#" class="list-group-item">标注框列表</p>
+            <div class="panel-group" id="labelList" >
+                                               
+            </div>
+           
+      
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+        <div class="col-xs-12 col-sm-9" >
+          <p class="pull-left visible-xs">
+            <button type="button" class="btn btn-primary btn-xs " data-toggle="offcanvas">设置标注信息</button>
+          </p>
+          <div id="imgarea">
+            <canvas id="canvas" class="img-responsive">
+            </canvas>           
+          </div>
+          <hr>
+			<ul class="list-group btlist " style="text-align: center;">
+        		
+      		</ul>
+        </div><!--/.col-xs-12.col-sm-9-->
+        
+      </div><!--/row-->
+  
+      <footer>
+        <p>&copy; 2018 Company, Inc.</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="resources/jquery/jquery-1.10.2.js"></script>
+    <script src="resources/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="resources/js/canvasJs/jcanvas.min.js"></script>
+    <script src="resources/js/rectangleWork/workMain.js"></script>
+    <script src="resources/js/rectangleWork/drawRect.js"></script>
+    <script src="resources/js/rectangleWork/workRect.js"></script>
+    <script src="resources/js/canvasJs/offcanvas.js"></script>
+    </body>
+</html>
