@@ -19,8 +19,8 @@
     		and password = #{password}
     	</select>
     	<insert id="registerDeveloper" parameterType="developer">
-    		insert into developer(developer,password,date,email) 
-    		values(#{developer.developer},#{developer.password},#{developer.date},#{developer.email})
+    		insert into developer(developer,password,date,email,mob,identity) 
+    		values(#{developer.developer},#{developer.password},#{developer.date},#{developer.email},#{developer.mob},#{developer.identity})
     	</insert>
     	<update id="exportBalance">
     		UPDATE developer SET balance = balance - #{money}			

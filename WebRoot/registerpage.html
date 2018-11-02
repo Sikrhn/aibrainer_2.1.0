@@ -26,19 +26,28 @@
    <div class="container">
    <div class="jumbotron">
 		        <h1>AiBrainer - 爱标注数据标注平台</h1>		      
-		    </div>  <h1 style="text-align:center;">找回密码or修改密码</h1>
+		    </div>  <h1 style="text-align:center;">注册开发者账号</h1>
       <div class="form-signin"> 
-      	 <h4 style="text-align:center;"><input type="checkbox" id="isdeveloper" class="" name="isdeveloper"/>是否为开发者账户</h4>
+      	<input type="hidden" id="isdeveloper" name = "isdeveloper" value=true>
       	<br>
-        <label >输入您的账号</label>
+        <label >输入账号</label>
         <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
-        <label >输入您的电子邮箱</label>
-        <input type="text" id="email" class="form-control" placeholder="email" required autofocus>
-         <label>输入您的新密码</label>
+        	<label>您的身份是</label>
+        <select class="form-control" name="identity" id="identity" >
+        	<option value="学生" selected="selected">学生</option>
+        	<option value="教师">教师</option>
+        	<option value="爱好者">爱好者</option>
+        	<option value="研究人员">研究人员</option>
+        </select><br>
+         <label >输入电话号码</label>
+        <input type="text" id="mob" class="form-control" placeholder="mobile phone" required autofocus>
+         <label>输入密码</label>
         <input type="password" id="password" class="form-control" placeholder="password" required autofocus>
          <label >请再次确认密码</label>
         <input type="password" id="repassword" class="form-control" placeholder="repassword" required autofocus>
-        <button class="btn btn-lg btn-primary btn-block" id="btn1" >确定</button>
+        <label >输入您的电子邮箱</label>
+        <input type="text" id="email" class="form-control" placeholder="email" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block" id="develop_btn" >确定</button>
       </div>
     </div> <!-- /container -->
     <script type="text/javascript" src="resources/js/login-register.js"></script>

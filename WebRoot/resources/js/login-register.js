@@ -140,19 +140,20 @@ function matchInput(){
 	}
 	return false;
 }        
-function sendParam(params){
+function sendParam(url,params,msg,errmsg){
         	$.ajax({
-        		url:"http://localhost:8080/aibrainer_2.1.0/changePassword.action",
+        		url:url,
         		method:"post",
+        		contentType: 'application/json; charset=UTF-8',
         		data:params,
         		dataType:"json",
         		success:function(data){
         			if(data.code==200){
-        				alert("密码重置成功！");
+        				alert(msg);
         				window.location.href="http://localhost:8080/aibrainer_2.1.0";
         			}
         			else
-        				alert("输入的账号邮箱错误或不存在！")
+        				alert(errmsg)
         		
         		}
         	});
@@ -167,6 +168,21 @@ $("#btn1").click(function(){
     		isdeveloper:$("#isdeveloper")[0].checked      		
     }
 	
-	sendParam(params);
+	sendParam("http://localhost:8080/aibrainer_2.1.0/changePassword.action",params,"密码重置成功！","输入的账号邮箱错误或不存在！");
+});
+
+$("#develop_btn").click(function(){
+	if(matchInput())
+		return;
+	var params = {
+    		username:$("#username").val(),
+    		password:$("#password").val(),
+    		email:$("#email").val(),
+    		isdeveloper:true,
+    		mob:$("#mob").val(),
+    		identity:$("#identity").val()
+    }	
+	sendParam("http://localhost:8080/aibrainer_2.1.0/register",JSON.stringify(params),"账号注册成功！","账号已存在！");
+
 });
    

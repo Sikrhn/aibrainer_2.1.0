@@ -20,9 +20,9 @@ public class DeveloperServiceImpl implements DeveloperService {
 			return false;
 	}
 
-	public boolean developerRegister(String developer,String password,String email) {
+	public boolean developerRegister(String developer,String password,String email,String identity,String mob) {
 		if(developerDao.matchDeveloper(developer, password)==null){
-			developerDao.registerDeveloper(new Developer(developer,password,0.0,new SimpleDateFormat("yyyy-MM-dd").format(new Date()),email));
+			developerDao.registerDeveloper(new Developer(developer,password,0.0,new SimpleDateFormat("yyyy-MM-dd").format(new Date()),email,identity,mob));
 			return true;
 		}		
 		else{

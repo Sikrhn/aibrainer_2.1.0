@@ -70,11 +70,13 @@ public class LogAndRegController {
 		String password = udBody.getPassword();
 		String email = udBody.getEmail();
 		if(isdeveloper){
-//			if(developerService.getDeveloperMsg(name)==null){
-//				developerService.developerRegister(name, password);
-//				return new DataBody(200,"success",false,null);
-//			}	
-			return new DataBody(412,"开发者暂不开放注册",false,null);
+			if(developerService.getDeveloperMsg(name)==null){
+				String mob = udBody.getMob();
+				String identity = udBody.getIdentity();
+				developerService.developerRegister(name, password,email,identity,mob);
+				return new DataBody(200,"success",false,null);
+			}	
+			return new DataBody(412,"账号已存在",false,null);
 		}else{
 			if(userService.getUserMsg(name)==null){
 				userService.userRegister(name, password,email);

@@ -21,7 +21,7 @@ public interface DeveloperService {
 	 * @parameters:HttpServletRequest
 	 * @return:boolean
 	 * */
-	boolean developerRegister(String developer,String password,String email);
+	boolean developerRegister(String developer,String password,String email,String identity,String mob);
 	/**
 	 * @description:获取开发者详情信息
 	 * @parameters:开发者名

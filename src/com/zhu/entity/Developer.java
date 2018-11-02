@@ -6,6 +6,8 @@ public class Developer {
 	private double balance;
 	private String date;
 	private String email;
+	private String identity;
+	private String mob;
 	public String getDeveloper() {
 		return developer;
 	}
@@ -40,13 +42,28 @@ public class Developer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getIdentity() {
+		return identity;
+	}
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+	public String getMob() {
+		return mob;
+	}
+	public void setMob(String mob) {
+		this.mob = mob;
+	}
 	public Developer(String developer, String password, double balance,
-			String date, String email) {
+			String date, String email, String identity, String mob) {
 		super();
 		this.developer = developer;
 		this.password = password;
 		this.balance = balance;
 		this.date = date;
 		this.email = email;
+		this.identity = identity;
+		this.mob = mob;
 	}
+	
 }

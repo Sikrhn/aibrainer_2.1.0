@@ -10,6 +10,8 @@ public class UserDeveBody {
 	private String password;
 	private boolean isdeveloper;
 	private String email;
+	private String mob;
+	private String identity;
 	public String getUsername() {
 		return username;
 	}
@@ -29,7 +31,6 @@ public class UserDeveBody {
 		this.isdeveloper = isdeveloper;
 	}
 	public UserDeveBody() {
-		super();
 	}
 	public UserDeveBody(String username, String password, boolean isdeveloper) {
 		super();
@@ -37,11 +38,34 @@ public class UserDeveBody {
 		this.password = password;
 		this.isdeveloper = isdeveloper;
 	}
+	
+	public UserDeveBody(String username, String password, boolean isdeveloper,
+			String email, String mob, String identity) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.isdeveloper = isdeveloper;
+		this.email = email;
+		this.mob = mob;
+		this.identity = identity;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getIdentity() {
+		return identity;
+	}
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+	public String getMob() {
+		return mob;
+	}
+	public void setMob(String mob) {
+		this.mob = mob;
 	}
 	
 }

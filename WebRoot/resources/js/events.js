@@ -6,6 +6,8 @@
 window.onload=function(){	  
 	  if(!main.isLogin){
 		  main.ajax('http://localhost:8080/aibrainer_2.1.0/homeData','get',null,false,true);
+		  $("#waiting").css("display","none");
+		  $("#Loading").css("display","none");
 		  main.isLogin = main.data.login;
 		  main.isDeveloper = main.data.developer;
 	  }  
