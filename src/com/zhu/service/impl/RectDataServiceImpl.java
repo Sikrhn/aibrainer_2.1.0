@@ -43,6 +43,7 @@ public class RectDataServiceImpl implements RectDataService{
 		String assignment = rectDatas.get(0).getRectDatas().get(0).getAssignment();
 		if(developer!=null&&assignment!=null){
 			utdao.updateMarkedNum(username, developer, assignment, rectDatas.size());
+			
 			for(RectDataTransport item : rectDatas){					
 				rddao.markedDtData(developer,assignment,item.getDataName());
 				for(RectData i:item.getRectDatas())

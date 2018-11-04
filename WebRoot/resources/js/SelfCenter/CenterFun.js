@@ -82,14 +82,11 @@ function verifyRequest(cont,obj,operate,params){
 					var warm = `可能需要一定的时间进行统计数据`;
 				let flag = confirm("确定完成任务并且下载标注结果吗？"+warm);
 				if(flag)	
-					window.open(`http://localhost:8080/aibrainer_2.1.0/session/download.action?developer=${params.developer}&assignment=${params.assignment}&taskType=${params.taskType}&isPublic=1`);
+					window.open(`http://localhost:8080/aibrainer_2.1.0/session/download.action?developer=${params.developer}&assignment=${params.assignment}&taskType=${params.taskType}&isPublic=true`);
 			}else{
-				window.open(`http://localhost:8080/aibrainer_2.1.0/session/download.action?developer=${params.developer}&assignment=${params.assignment}&taskType=${params.taskType}&isPublic=1`);
+				window.open(`http://localhost:8080/aibrainer_2.1.0/session/download.action?developer=${params.developer}&assignment=${params.assignment}&taskType=${params.taskType}&isPublic=true`);
 			}
 			
-		}else{
-			alert("download!");
-			//ajax
 		}
 		break;
 	case "delete":

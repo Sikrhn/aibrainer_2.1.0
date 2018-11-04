@@ -21,13 +21,20 @@ public class SmallTools {
 	 
 	public static void exportCsv(String path,String assignment,List<RectData> list){
 		 BufferedWriter bw = null;
-		 File csvFile =new File(path+"result"+File.separator+assignment+".csv");	
+		 FileOutputStream fos = null;
+		 OutputStreamWriter os = null;			
+		 FoldUtils.createLabelFold(path);
+		 System.out.println(path+File.separator+assignment+".csv");
+		 File csvFile =new File(path+File.separator+assignment+".csv");	
 		 
 		 try {
 			csvFile.createNewFile();
 			 //ÎÚ°àÍ¼ÏÂ¸ÄÎª utf-8
-			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(  
-					csvFile), "GBK"), 1024);
+			fos =new FileOutputStream(csvFile);
+			os = new OutputStreamWriter(fos,"GBK");
+			bw = new BufferedWriter(os, 1024);
+//			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(  
+//					csvFile), "GBK"), 1024);
 			String[] head = {"data_name","width","height","data_label","xmin","ymin","xmax","ymax"};
 			for(int i =0;i<head.length ;i++){
 				bw.write(head[i]);
@@ -60,9 +67,13 @@ public class SmallTools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			try {
+			try {				
 				if(bw!=null)
 					bw.close();
+				if(os!=null)
+					os.close();
+				if(fos!=null)
+					fos.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

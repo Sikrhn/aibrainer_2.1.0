@@ -121,6 +121,8 @@ public class FoldUtils {
 	}
 
 	public static void delFolder(String folderPath) {
+		if(!new File(folderPath).exists())
+			return;
 	     try {
 	        delAllFile(folderPath); //删除完里面所有内容
 	        String filePath = folderPath;
@@ -159,5 +161,6 @@ public class FoldUtils {
 	       }
 	       return flag;
 	}
+	
 }
 

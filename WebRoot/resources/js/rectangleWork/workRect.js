@@ -47,6 +47,8 @@ EventList = {
 				main.index=-1;
 				if(main.currentNum<5||preObj.length==0){
 					main.isSend=false;
+					$("#marked").text(parseInt($("#marked").text())+1);
+					$("#mymarked").text(parseInt($("#mymarked").text())+1);
 					if(!main.ispublic){
 						ajaxPackage("http://localhost:8080/aibrainer_2.1.0/go/sendisover.action",{developer:main.developer,assignment:main.assignment,taskType:main.taskType},false);
 						alert("该任务已完成，进入等候审核期！您可以参加其他任务");		
@@ -112,7 +114,7 @@ $("#improper").click(function(){
 
  function drawPen(){
         var color = "#79FF79";
-        var width = 1;
+        var width = 3;
         CanvasExt.touchDrawRect(color,width);
         CanvasExt.mouseDrawRect(color,width);
         
@@ -243,7 +245,7 @@ function selectChange(){
 function filterImg(){
 	var flag = confirm("此图像归类为非正常并且进入下一张？");
 	if(flag){
-		workObj[main.imgIndex].labels.push(operateDOM.setRectObj(0,null,0,0,0,0,-1));
+		workObj[main.imgIndex].labels.push(operateDOM.setRectObj(0,null,0,0,0,0,0,0,-1));
 		EventList.nextImg(true);
 	}
 	

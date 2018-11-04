@@ -129,7 +129,7 @@ function detailClickFun(cont,val){
 			workPage(cont,param);
 			$("body,html").scrollTop($("#j-slider").height());
 		}else if(val.taskType=="拉框标注"){
-			window.open(`http://localhost:8080/aibrainer_2.1.0/work.html?developer=${val.developer}&assignment=${val.assignment}&taskType=${val.taskType}&ispublic=1`);
+			window.open(`http://localhost:8080/aibrainer_2.1.0/work.html?developer=${val.developer}&assignment=${val.assignment}&taskType=${val.taskType}&ispublic=true`);
 		}
 	});
 }

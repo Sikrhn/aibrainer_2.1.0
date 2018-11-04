@@ -23,10 +23,7 @@ public class TaskClassesServiceImpl implements TaskClassesService{
 		for(String label:labels){
 			String labelPath = filePath+File.separator+label;
 			System.out.println(labelPath);
-			if(taskType.equals("ÕºœÒ∑÷¿‡"))
-				FoldUtils.createLabelFold(labelPath);
-			else
-				FoldUtils.createLabelFold("result");
+			FoldUtils.createLabelFold(labelPath);
 			tcdao.insertLabel(new TaskClasses(developer,assignment,label));
 		}
 	}

@@ -174,11 +174,9 @@ function linkPage(val,cont,index){
 function suitPage(val){
 	
 	if($("#mycontent").height() <= $(window).height()-200){		
-		console.log($("#mycontent").height(),$(window).height())
 	    	$("#cont").css("height",$(window).height());
 			$("#mycontent").css("height",$(window).height()-100);
 	}else{
-		console.log($("#mycontent").height(),$(window).height())
 		$("#cont").css("height","");
 	}
     if(main.isPc&&val!=null){

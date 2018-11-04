@@ -14,7 +14,7 @@ $(function(){
 	    url:"http://localhost:8080/aibrainer_2.1.0/go/work",
 	    async:false,
 	    type:"get",
-	    data:{developer:getUrlParam("developer"),assignment:getUrlParam("assignment"),taskType:getUrlParam("taskType"),ispublic:true},
+	    data:{developer:getUrlParam("developer"),assignment:getUrlParam("assignment"),taskType:getUrlParam("taskType"),ispublic:getUrlParam("ispublic")},
 	    dataType:'json',
 	    success:function(data){
 	    	task = data.data.task;
@@ -25,7 +25,10 @@ $(function(){
 	    	$("#developer").text(main.developer);
 	    	$("#assignment").text(main.assignment);
 	    	$("#description").text(task.description);
-	    	$("#mymarked").text(data.data.usermarked);
+	    	if(task.ispublic)
+	    		$("#mymarked").text(0);
+	    	else
+	    		$("#mymarked").text(data.data.usermarked);
 	    	$("#marked").text(data.data.marked);
 	    	$("#sum").text(data.data.task.sum);
 	    	main.ispublic=task.ispublic;
@@ -128,6 +131,7 @@ function sendData(url){
 	$.each(workObj,function(index,val){
 		dtoObj.push({dataName:val.img.dataName,rectDatas:[]});
 		$.each(val.labels,function(i,v){
+			
 			dtoObj[index].rectDatas.push({
 				developer:main.developer,
 				assignment:main.assignment,

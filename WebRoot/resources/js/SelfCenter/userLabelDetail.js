@@ -81,6 +81,7 @@ function clickList(cont,params){
 		deleteUser(cont,params);
 	});
 	$("#next").click(function(){
+		console.log("asd")
 		if(workObj.workData.length>0)
 			nextPic("http://localhost:8080/aibrainer_2.1.0/session/userdetails");
 	})
@@ -118,6 +119,7 @@ function canvasPic(data,src){
 	    	canvas.width=width;
 	    	canvas.height = height;	    	
 	    	ctx.strokeStyle="#79FF79";
+	    	ctx.strokeWidth=3;
 	    	if(data.dataLabel==-1){
 	    		$("#anno").text("图像中无目标或非正常显示");
 	    	}
@@ -138,7 +140,8 @@ function nextPic(url,satistic=false){
 	 if(workObj.taskType=="图像分类")
 		 workObj.img.attr("src", srcPath+workObj.workData[workObj.index].dataName);
 	 else if(workObj.taskType=="拉框标注")
-		 canvasPic(workObj.workData[workObj.index],srcPath+workObj.workData[workObj.index].dataName); 
+		 canvasPic(workObj.workData[workObj.index],srcPath+workObj.workData[workObj.index].dataName);
+	 console.log(11)
 	 $("#anno").text(workObj.workData[workObj.index].dataLabel);
 	 $("#dataname").text(workObj.workData[workObj.index].dataName);
 }	

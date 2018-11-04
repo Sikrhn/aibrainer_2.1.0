@@ -97,6 +97,7 @@ function labelDo(){
 					workObj.index=-1;
 					if(workObj.workData.length<10||workObj.preData.length==0){
 						workObj.isSend=false;
+						$("#marked").text(parseInt($("#marked").text())+1);
 						main.ajax("http://localhost:8080/aibrainer_2.1.0/go/sendisover.action","get",{developer:workObj.developer,assignment:workObj.assignment},true,false);
 						alert("该任务已完成，进入等候审核期！您可以参加其他任务");				
 						return;

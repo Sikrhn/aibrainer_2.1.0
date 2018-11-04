@@ -96,6 +96,7 @@ function taskText(data,username){
 				btObj.downloadBt="前去统计页面下载";
 				btObj.calculateBt="统计数据";
 			}
+			console.log(val.task)
 			taskOver = val.task.isover;
 			if(val.userList&&val.userList.length>0){
 				$.each(val.userList,function(index,val){					

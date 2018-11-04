@@ -246,7 +246,7 @@ public class DevTaskController {
 			String taskType = request.getParameter("taskType");	
 			String isPublic = request.getParameter("isPublic");
 			realPath = realPath+File.separator+developer+File.separator+assignment;
-			if(isPublic.equals("1")){
+			if(isPublic.equals("true")){
 				if(taskType.equals("图像分类")){
 					if(dtService.setTaskOver(developer, assignment)){
 						pdService.classifyLabel(developer, assignment, realPath);
@@ -256,14 +256,9 @@ public class DevTaskController {
 					}	
 				}else if(taskType.equals("拉框标注")){
 					dtService.caculateData(developer, assignment, taskType,realPath,true);
-					realPath = realPath +File.separator+"result";
 				}
 			}else{
-				if(dtService.getDetailOne(developer, assignment).isIsover()){
-					if(taskType.equals("拉框标注"))				
-						realPath = realPath +File.separator+"result";
-				}
-				else{
+				if(!dtService.getDetailOne(developer, assignment).isIsover()){
 					return null;
 				}
 			}

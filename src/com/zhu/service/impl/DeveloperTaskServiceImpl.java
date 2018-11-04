@@ -107,7 +107,7 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 	}
 	@Transactional
 	public boolean deleteTask(String developer, String assignment,boolean isPublic,String taskType,String sourceFilePath) {
-		
+		FoldUtils.delFolder(sourceFilePath);
 		if(!isPublic){	
 			DeveloperTask dt = dtdao.getDetailOne(developer, assignment);			
 			if(!dt.isIsover()){		
@@ -128,10 +128,11 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 			utdao.deleteUserTask(assignment, developer);
 			
 		}else{
+			FoldUtils.delFolder(sourceFilePath+".zip");
 			if(taskType.equals("图像分类"))			
 				pddao.deleteDataByAssignment(developer, assignment);
 			else if(taskType.equals("拉框标注"))
-				rddao.deleteDataByUsername(null, "admin", "汽车种类");
+				rddao.deleteDataByUsername(null, developer, assignment);
 		}
 		dtdao.deleteTaskByAssignment(developer, assignment);
 		dddao.deleteDataByAssignment(developer, assignment);		
@@ -166,8 +167,12 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 		for(TaskBody task : taskList){
 			Map<String,Object> map1 = new HashMap<String,Object>(); 
 			map1.put("task", task);	
-			if(task.isIspublic())
-				map1.put("markedNum", pddao.getMarkedNumber(task.getAssignment(), developer));
+			if(task.isIspublic()){
+				if(task.getTaskType().equals("图像分类"))
+					map1.put("markedNum", pddao.getMarkedNumber(task.getAssignment(), developer));
+				else if(task.getTaskType().equals("拉框标注"))
+					map1.put("markedNum",dddao.getMarkedNum(developer, task.getAssignment()));
+			}
 			else
 				map1.put("userList", utdao.getUserSimpleByTask(task.getAssignment(), developer));
 			map.put(task.getAssignment(),map1 );
@@ -242,7 +247,7 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 					userdao.getReward(new User(utlist.get(i).getUsername(),"",1,taskmoney,96.8,"",marked/10));
 				}
 			}
-			SmallTools.exportCsv(path+File.separator+"result", assignment,rdlist);
+			SmallTools.exportCsv(path, assignment,rdlist);
 		}
 	}
 	
@@ -262,8 +267,9 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 	public Map<String,Object> workPageData(HttpServletRequest request){
 		String username = (String) request.getSession().getAttribute("username");
 		Map<String,Object> map = new HashMap<String,Object>();
-		String ispublic = request.getParameter("ispublic");
-		if(username!=null || ispublic!=null&&ispublic.equals("true")){
+		boolean ispublic = request.getParameter("ispublic").equals("true");
+		
+		if(username!=null || ispublic){
 			String taskType= request.getParameter("taskType");
 			String developer = request.getParameter("developer");
 			String assignment = request.getParameter("assignment");	
@@ -281,8 +287,11 @@ public class DeveloperTaskServiceImpl implements DeveloperTaskService {
 			}else if(taskType.equals("拉框标注")){
 				if(umb!=null){
 					map.put("marked", dddao.getMarkedNum(developer, assignment));
-					map.put("usermarked", utdao.getWorkingTask(username, developer, assignment).getMarkedNum());
 					map.put("task", dtdao.getDetailOne(developer, assignment));
+					if(ispublic)
+						return map;
+					map.put("usermarked", utdao.getWorkingTask(username, developer, assignment).getMarkedNum());
+					
 					return map;
 				}
 			}
